@@ -15,8 +15,8 @@
                     <el-table :data="displayedData" stripe style="width: 100%">
                         <el-table-column prop="name" label="名称" width="150px"></el-table-column>
                         <el-table-column prop="image_name" label="镜像名称" ></el-table-column>
-                        <el-table-column prop="image_url" label="镜像url" ></el-table-column>
-                        <el-table-column prop="output" label="输出结果" ></el-table-column>
+<!--                        <el-table-column prop="image_url" label="镜像url" ></el-table-column>-->
+
                         <el-table-column prop="status" label="状态"  style="width: 50px;">
                             <template slot-scope="scope">
                                 <el-tag style="size:smaller"
@@ -24,9 +24,10 @@
                                 disable-transitions>{{ scope.row.status }}</el-tag>
                             </template>
                         </el-table-column>
+                      <el-table-column prop="output" label="返回结果" ></el-table-column>
                         <el-table-column label="操作">
                             <template slot-scope="scope">
-                                
+
                                 <el-button v-if="role" size="mini" type="text" @click="deleteJob(scope.row.name)">删除</el-button>
                                 <el-button v-if="!role" size="mini" type="text" @click="deleteJob(scope.row.name)" disabled>删除</el-button>
                                 <!-- <el-dropdown style="font-size: smaller; left: 5px;" >
@@ -34,7 +35,7 @@
                                         下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
                                     </span>
                                     <el-dropdown-menu slot="dropdown">
-                                        
+
                                         <el-dropdown-item>功能x</el-dropdown-item>
                                     </el-dropdown-menu>
                                 </el-dropdown> -->
@@ -133,7 +134,7 @@ export default {
 .interface{
   height: 100%;
   background-color: #F2F6FC;
-  
+
   width: 100%;
 }
 

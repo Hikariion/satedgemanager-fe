@@ -14,31 +14,28 @@
                 </div>
                 <div class="table">
                     <el-table :data="displayedData" stripe style="width: 100%">
-                        <el-table-column prop="name" label="节点名称" width="150px">
+                        <el-table-column prop="name" label="节点名称">
                             <template slot-scope="scope">
                                 <el-button size="mini" type="text" @click="gotoNode(scope.row.name)">{{ scope.row.name }}</el-button>
                             </template>
                         </el-table-column>
-                        <!-- <el-table-column prop="ip" label="IP" width="150px"></el-table-column> -->
-                        <el-table-column prop="create_time" label="创建时间" ></el-table-column>
-                        <el-table-column prop="roles" label="节点类型" width="100px"></el-table-column>
-                        <el-table-column prop="cpu_cores" label="CPU核心数" width="100px"></el-table-column>
-                        <!-- <el-table-column prop="cpu_avaliable" label="CPU空闲数" width="100px"></el-table-column> -->
+                         <el-table-column prop="ip" label="IP"></el-table-column>
+                        <el-table-column prop="create_time" label="上线时间" ></el-table-column>
+                        <el-table-column prop="roles" label="所属集群"></el-table-column>
+                        <el-table-column prop="cpu_cores" label="CPU核心数" ></el-table-column>
 
-                        <el-table-column prop="memory" label="内存">
+                        <el-table-column prop="memory" label="内存" >
                             <template slot-scope="scope">
                                 {{ scope.row.memory }} G
                             </template>
                         </el-table-column>
                         <!-- <el-table-column prop="memory_avaliable" label="可用内存" ></el-table-column> -->
-                        <el-table-column prop="disk" label="存储容量" width="100px">
+                        <el-table-column prop="disk" label="存储容量" >
                             <template slot-scope="scope">
                                 {{ scope.row.disk }} G
                             </template>
                         </el-table-column>
-                        
-                        <el-table-column prop="gpu" label="GPU" width="100px"></el-table-column>
-                        
+
                     </el-table>
                 </div>
                 <div class="block">
@@ -61,9 +58,9 @@
 export default {
     data() {
         return{
-           
+
             tableData: [
-            
+
             ],
             displayedData:[], //当页展示的数据
             pageSize:10,
@@ -91,20 +88,11 @@ export default {
             })
         },
         gotoNode(name){
-            // if(name =='NPU'){
-            //     this.$router.push({
-            //     name:'npuinfo'
-            //  })
-            // }else if(name =='GPU'){
-            //     this.$router.push({
-            //         name:'gpuinfo'
-            //     })
-            // }
             this.$router.push({
                 name:'nodeinfo',
                 params:{ name: name }
             })
-            
+
         },
         getNodes(){
             this.$http.get('/node/info').then(res => {
@@ -123,7 +111,7 @@ export default {
     },
     mounted() {
         this.getNodes();
-        
+
     },
 }
 </script>

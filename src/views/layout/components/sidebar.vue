@@ -15,18 +15,18 @@
             <span slot="title">资源管理</span>
             <el-menu-item index="edge-node" @click="gotoEdgeNode">节点</el-menu-item>
             <!-- <el-menu-item index="storage" @click="gotoStorageManagement">存储</el-menu-item> -->
-            <el-menu-item index="network" @click="gotoWebManagement">网络</el-menu-item>
+<!--            <el-menu-item index="network" @click="gotoWebManagement">网络</el-menu-item>-->
           </el-submenu>
 
           <el-submenu index="virtual_resource">
             <span slot="title">虚拟资源</span>
             <el-menu-item index="Pod-management" @click="gotoPodManagement">容器</el-menu-item>
-            <!-- <el-menu-item index="VirtualMechine-management" @click="gotoVMManagement">虚拟机</el-menu-item> -->
+<!--             <el-menu-item index="VirtualMechine-management" @click="gotoVMManagement">虚拟机</el-menu-item>-->
           </el-submenu>
 
           <el-submenu index="application">
             <span slot="title">应用管理</span>
-            <el-menu-item index="Deployment-management" @click="gotoDeploymentManagement">在线任务</el-menu-item>
+<!--            <el-menu-item index="Deployment-management" @click="gotoDeploymentManagement">在线任务</el-menu-item>-->
             <el-menu-item index="Job-management" @click="gotoJobManagement">离线任务</el-menu-item>
             <el-menu-item index="StreamingTask-management" @click="gotoStreamingTask">流式计算任务</el-menu-item>
           </el-submenu>

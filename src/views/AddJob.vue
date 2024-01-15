@@ -31,10 +31,27 @@
                         @select="handleSelect"
                         ></el-autocomplete>
                     </el-form-item>
-                    
+
+                  <el-form-item label="上传文件">
+                    <el-upload
+                      class="upload-demo"
+                      action="https://example.com/upload"
+                      accept=".txt,image/png,image/jpeg"
+                      :on-preview="handlePreview"
+                      :on-remove="handleRemove"
+                      :before-upload="beforeUpload"
+                      :on-success="handleSuccess"
+                      :on-error="handleError"
+                      multiple
+                      list-type="text">
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <div slot="tip" class="el-upload__tip">只能上传.txt/.png/.jpg文件</div>
+                    </el-upload>
+                  </el-form-item>
+
                     <el-form-item>
                         <el-button type="primary" @click="SubmitCreateJob(form)">立即创建</el-button>
-                       
+
                     </el-form-item>
                 </el-form>
             </el-card>
@@ -91,7 +108,7 @@ export default {
                     this.form.name = '';
                     this.form.back_off_limit = ''
                     this.form.image_name = ''
-                    
+
                     this.$router.push({
                         name:'job'
                     })
@@ -100,12 +117,12 @@ export default {
                     this.form.name = '';
                     this.form.back_off_limit = ''
                     this.form.image_name = ''
-                   
+
                 }
-                
+
             })
         }
-        
+
     },
     mounted(){
         this.images = this.loadAll()
