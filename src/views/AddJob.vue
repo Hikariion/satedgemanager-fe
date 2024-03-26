@@ -135,11 +135,70 @@ export default {
         })
       },
 
-      SubmitJob(form, fileList) {
-        console.log("submit job")
-        console.log(form)
-        console.log(fileList)
+      async SubmitJob(form, fileList) {
+        let submitJobUrl = 'http://localhost:5000/submit_job'
 
+        // Check for required fields
+        if (!form.job_name || !form.image_name || !form.lon || !form.lat || fileList.length === 0) {
+          this.$message.error('所有字段必须填写');
+          return;
+        }
+
+        // Validate longitude and latitude
+        const lon = parseFloat(form.lon);
+        const lat = parseFloat(form.lat);
+        if (isNaN(lon) || lon < -180 || lon > 180 || isNaN(lat) || lat < -90 || lat > 90) {
+          this.$message.error('经纬度必须是有效值，纬度范围为-90到90，经度范围为-180到180');
+          return;
+        }
+
+        // Create form data
+        let formData = new FormData();
+        if (fileList.length > 0) {
+          // Append file to form data if it exists
+          formData.append('file', fileList[0].raw);
+        } else {
+          this.$message.error('必须上传一个文件');
+          return;
+        }
+
+        // Append JSON data to form data
+        const reqData = {
+          job_name: form.job_name,
+          image_name: form.image_name,
+          lon: form.lon,
+          lat: form.lat,
+        };
+
+        formData.append('req', JSON.stringify(reqData));
+
+        // POST request with form data
+        try {
+          const response = await fetch(submitJobUrl, {
+            method: 'POST',
+            body: formData,
+            mode: 'cors', // This will allow to send cross-origin requests
+            // If you need to include credentials such as cookies with the request, add the following line:
+            // credentials: 'include',
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const responseData = await response.json();
+          if (responseData.status === 'success') {
+            this.$message.success('任务创建成功');
+            this.$router.push({
+              name: 'job'
+            })
+          } else {
+            this.$message.error('任务创建失败');
+          }
+        } catch (error) {
+          console.error('提交任务失败:', error);
+          this.$message.error('提交任务时发生错误');
+        }
       },
 
       generateRandomCoordinates(){
