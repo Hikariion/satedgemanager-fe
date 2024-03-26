@@ -29,24 +29,24 @@
         </div>
       </el-card>
 
-      <el-card class="resource-overview" >
-        <div class="clearfix">
-          <span>资源总览</span>
-        </div>
-        <el-card shadow="never" class="resource-inner">
-          <div style="display:flex; justify-content: space-around;">
-              <div v-for="item in resource_overview_list" :key="item" >
-                <div style="font-size:medium; margin-left: -15px;">
-                  {{ item.name }}
-                </div>
-                <div style="color: dodgerblue; font-size: 35px; margin-top: 5px;" >
-                  {{item.data}}
-                  <span style="font-size: small;">个</span>
-                </div>
-              </div>
-          </div>
-        </el-card>
-      </el-card>
+<!--      <el-card class="resource-overview" >-->
+<!--        <div class="clearfix">-->
+<!--          <span>资源总览</span>-->
+<!--        </div>-->
+<!--        <el-card shadow="never" class="resource-inner">-->
+<!--          <div style="display:flex; justify-content: space-around;">-->
+<!--              <div v-for="item in resource_overview_list" :key="item" >-->
+<!--                <div style="font-size:medium; margin-left: -15px;">-->
+<!--                  {{ item.name }}-->
+<!--                </div>-->
+<!--                <div style="color: dodgerblue; font-size: 35px; margin-top: 5px;" >-->
+<!--                  {{item.data}}-->
+<!--                  <span style="font-size: small;">个</span>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--          </div>-->
+<!--        </el-card>-->
+<!--      </el-card>-->
     </div>
   </div>
 </template>
@@ -60,7 +60,7 @@ export default {
       select_app:'',
       functionlist:[
         {
-          name:"资源管理",
+          name:"节点管理",
           src: require('../assets/addedge.png')
         },
         // {
@@ -107,7 +107,7 @@ export default {
           data:5
         }
       ],
-      
+
     }
   },
   methods:{
@@ -120,7 +120,7 @@ export default {
     },
 
     gotoPage(name){
-      
+
       if(name=='资源管理'){
         this.$router.push({
           name:'node'
@@ -149,20 +149,20 @@ export default {
     },
     getAllInfo(){
       this.$http.post('/overview/info').then(res =>{
-        
+
         this.resource_overview_list[0].data = res.data.data.node_count
         this.resource_overview_list[1].data = res.data.data.job_count
         this.resource_overview_list[2].data = res.data.data.pod_count
       })
     }
-    
+
   },
   mounted() {
     console.log(process.env)
     this.getAllInfo()
   },
   watch:{
-      
+
     },
 
 
@@ -206,7 +206,7 @@ export default {
   right: 2%;
   height: 320px;
   bottom: 30px;
-  
+
 }
 .resource-inner{
   position: relative;
@@ -242,7 +242,7 @@ export default {
   width: 150px;
   flex: 0 0 calc(33.33% - 10px);
   margin: 5px; /* 外边距，用于控制卡片之间的间距 */
-  display: flex; 
+  display: flex;
   justify-content:space-around;
   margin-bottom: 20px;
 }
