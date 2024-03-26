@@ -69,6 +69,8 @@
 </template>
 
 <script>
+import urlJoin from 'url-join'
+
 export default {
     data() {
         return{
@@ -136,7 +138,8 @@ export default {
       },
 
       async SubmitJob(form, fileList) {
-        let submitJobUrl = 'http://localhost:5000/submit_job'
+        const submitJobUrl = 'http://localhost:5000/submit_job'
+        const imageRepo = 'harbor.act.buaa.edu.cn/sat-demo-jobs'
 
         // Check for required fields
         if (!form.job_name || !form.image_name || !form.lon || !form.lat || fileList.length === 0) {
@@ -165,7 +168,7 @@ export default {
         // Append JSON data to form data
         const reqData = {
           job_name: form.job_name,
-          image_name: form.image_name,
+          image_name: urlJoin(imageRepo, form.image_name),
           lon: form.lon,
           lat: form.lat,
         };

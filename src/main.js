@@ -9,6 +9,7 @@ import vuetify from './plugins/vuetify'
 import * as echarts from 'echarts';
 import Plugin from 'v-fit-columns';
 import "@/assets/css/global.css"
+import urlJoin from "url-join"
 import Vuetify from 'vuetify'
 Vue.use(Vuetify)
 import axios from 'axios'
@@ -21,7 +22,7 @@ Vue.prototype.$http = axios
 
 Vue.use(ElementUI);
 Vue.use(Plugin);
-   
+
 /* eslint-disable no-new */
 
 new Vue({
